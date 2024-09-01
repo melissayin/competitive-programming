@@ -1,0 +1,19 @@
+git
+
+git -> version control system
+- a way to store your code
+
+github -> "google drive" for code
+- use git to "upload" code to github
+
+commands
+- git status -> self explanatory
+- git add [file] -> adds a file to be committed
+- git commit -> takes a "snapshot" of your codebase
+- git push -> upload it to whatever github repository
+
+workflow
+- git status (show everything that you want to add to github)
+- git add . (add all the files you changed)
+- git commit -m "Your message here"
+- git push origin main (uploads to github)
