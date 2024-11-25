@@ -37,23 +37,16 @@ string toBase(int num, int base) {
     return result;
 }
 
-int main () {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-
-    int n, b;
-    string s;
-    cin >> n >> b >> s;
-    
-    int start = baseToDecimal(s, b);
+int findModeCount(int num, int base, string start) {
+    int newStart = baseToDecimal(start, base);
     vector<string> numbers;
-    for (int i = 0; i < n; i++) {
-        numbers.push_back(toBase(start + i, b));
+    for (int i = 0; i < num; i++) {
+        numbers.push_back(toBase(newStart + i, base));
     }
 
     unordered_map<char, int> frequency;
-    for (string num: numbers) {
-        for (char digit: num){
+    for (string n: numbers) {
+        for (char digit: n){
             frequency[digit]++;
         }
     }
@@ -65,5 +58,19 @@ int main () {
         }
     }
 
-    cout << max << "\n";
+    return max;
+
+}
+
+int main () {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+
+    int n, b;
+    string s;
+    cin >> n >> b >> s;
+
+    cout << findModeCount(n, b, s) << "\n";
+    
+    
 }

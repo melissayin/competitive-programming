@@ -17,3 +17,5 @@ workflow
 - git add . (add all the files you changed)
 - git commit -m "Your message here"
 - git push origin main (uploads to github)
+
+cd ..
