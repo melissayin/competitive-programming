@@ -71,6 +71,4 @@ int main () {
     cin >> n >> b >> s;
 
     cout << findModeCount(n, b, s) << "\n";
-    
-    
 }
