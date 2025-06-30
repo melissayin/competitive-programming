@@ -7,14 +7,7 @@ int main () {
 
     int P, R, K;
     cin >> P >> R >> K;
-    
-    /*
-    vector<int> cows;
-    for (int i = 1; i <= P; i++) {
-        cows.push_back(i);
-    }
-        */
-    
+   
     int numCycles = R % P;
     //cout << "ncycles: " << numCycles << "\n";
     long long left = K - 1;
