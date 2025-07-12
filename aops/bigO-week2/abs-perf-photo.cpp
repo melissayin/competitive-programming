@@ -10,25 +10,32 @@ int main () {
 
     vector<int> gueCows;
     vector<int> holCows;
+    vector<tuple<int, string>> allCows;
     
     for (int i = 0; i < M; i++) {
         int x;
         cin >> x;
-        gueCows.push_back(x);
+        allCows.push_back(make_tuple(x, "gue"));
     }
     for (int i = 0; i < N; i++) {
         int x;
         cin >> x;
-        holCows.push_back(x);
+        allCows.push_back(make_tuple(x, "hol"));
     }
 
-    sort(gueCows.begin(), gueCows.end());
-    sort(holCows.begin(), holCows.end());
+    sort(allCows.begin(), allCows.end());
 
-    int size = min(M, N);
-
-    for (int i = 0; i < size; i++) {
-
+    int minDiff = INT_MAX;
+    for (int i = 0; i < allCows.size() - 1; i++) {
+        if (get<1>(allCows[i]) != get<1>(allCows[i + 1]) ) {
+            int diff = get<0>(allCows[i + 1]) - get<0>(allCows[i]);
+            if (diff < minDiff) {
+                minDiff = diff;
+            }
+        }
     }
+
+    cout << minDiff << "\n";
+    
 
 }
