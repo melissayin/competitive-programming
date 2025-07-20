@@ -3,40 +3,31 @@ using namespace std;
 
 int findMax(vector<vector<int>> rows) {
     int maxSum = 0;
-    // find max in row
-    // check all corresponding column sums 
+    // loop all pairs of cols and find sum 
+    for (int i = 0; i < rows[i].size(); i++) {
+        for (int j = i + 1; j < rows[j].size(); j++) {
+            int numRows = rows.size();
 
-    for (int i = 0; i < rows.size(); i++) {
-        int currSum = 0;
-        vector<int> r = rows[i];
-        int max1 = -1;
-        int ind = -1;
-        for (int j = 0; j < r.size(); j++) {
-            if (r[j] > max1) {
-                max1 = r[j];
-                ind = j;
+            vector<pair<int, int>> rowSums;
+            int max1 = -1;
+            int max2 = -1;
+
+            for (int k = 0; k < numRows; k++) {
+                int sum = rows[k][j] + rows[k][i];
+                rowSums.push_back(make_pair(sum, k));
             }
-        }
 
-        int max2 = -1;
-        int ind2 = -1;
-        for (int j = 0; j < r.size(); j++) {
-            if (r[j] > max2 && j != ind) {
-                max2 = r[j];
-                ind2 = j;
-                
-            }
-        }
-        int rowSum = max1 + max2;
+            sort(rowSums.rbegin(), rowSums.rend()); 
 
-        //cout << ind << " " << ind2 << " " << max1 << " " << max2 << "\n";
-        for (int j = 0; j < rows.size(); j++) {
-            if (j != i) {
-                int sum = rows[j][ind] + rows[j][ind2];
-                currSum = rowSum + sum;
-                if (currSum > maxSum) {
-                    maxSum = currSum;
+            for (int a = 0; a < rowSums.size(); ++a) {
+                for (int b = a + 1; b < rowSums.size(); ++b) {
+                    if (rowSums[a].second != rowSums[b].second) {
+                        int currSum = rowSums[a].first + rowSums[b].first;
+                        maxSum = max(maxSum, currSum);
+                        break;
+                    }
                 }
+                //break; 
             }
         }
     }
@@ -53,8 +44,6 @@ int main () {
     cin >> R >> C;
 
     vector<vector<int>> rows;
-    vector<vector<int>> cols;
-
     for (int i = 0; i < R; i++) {
         vector<int> r;
         for (int j = 0; j < C; j++) {
@@ -68,18 +57,8 @@ int main () {
 
     }
 
-    for (int i = 0; i < C; i++) {
-        vector<int> col;
-        for (int j = 0; j < R; j++) {
-            col.push_back(rows[j][i]);
+    cout << findMax(rows) << "\n";
 
-        }
-        cols.push_back(col);
-    }
 
-    int sum1 = findMax(rows);
-    int sum2 = findMax(cols);
-
-    cout << max(sum1, sum2) << "\n";
 
 }
